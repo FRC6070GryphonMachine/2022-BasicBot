@@ -31,8 +31,8 @@ public class Chassis extends SubsystemBase {
     leftSlave.setNeutralMode(NeutralMode.Brake);
 
     //set slaves
-    rightSlave.follow(right);
-    leftSlave.follow(left);
+    rightSlave.follow(left);
+    leftSlave.follow(right);
   }
 
   @Override
