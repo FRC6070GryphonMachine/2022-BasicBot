@@ -15,5 +15,6 @@ package frc.robot;
 public final class Constants {
   //Chassis (you might need to change these)
   //Talons are talons, slaves are VictorSPXs that are slaved to the Talons
-  public static final int leftSlave = 3, leftTalon = 2, rightSlave = 1, rightTalon = 0;
+  // public static final int leftSlave = 3, leftTalon = 2, rightSlave = 1, rightTalon = 0;
+  public static final int leftSlave = 1, leftTalon = 0, rightSlave = 3, rightTalon = 2; 
 }
