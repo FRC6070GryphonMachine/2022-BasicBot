@@ -4,12 +4,17 @@
 
 package frc.robot;
 
+import org.ejml.ops.ConvertMatrixData;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.Commands;
 // import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.StartDriving;
 import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Conveyor;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,15 +25,20 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static Chassis chassis;
+  public static Conveyor conveyor;
   public static XboxController xbox;
+  public static JoystickButton conveyorPullButton;
+  public static JoystickButton conveyorEjectButton;
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     chassis = new Chassis();
+    conveyor = new Conveyor();
     configureButtonBindings();
 
     chassis.setDefaultCommand(new StartDriving());
+    
   }
 
   /**
@@ -39,6 +49,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     xbox = new XboxController(0);
+    conveyorEjectButton = new JoystickButton(xbox, Constants.BTN_B);
+    conveyorPullButton = new JoystickButton(xbox, Constants.BTN_Y);
+
+    conveyorEjectButton.whenPressed(Commands.conveyorEject);
+    conveyorPullButton.whenPressed(Commands.conveyorPull);
   }
 
   public static double getYLeft(){
