@@ -6,10 +6,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.IntakeBall;
 // import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.StartDriving;
 import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Conveyor;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,16 +24,25 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static Chassis chassis;
   public static XboxController xbox;
+  public static JoystickButton intakeButton;
+  public static Conveyor conveyor;
+  
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     chassis = new Chassis();
+    conveyor = new Conveyor();
     configureButtonBindings();
 
     chassis.setDefaultCommand(new StartDriving());
+    conveyor.setDefaultCommand(new IntakeBall());
   }
 
+  
+  public static boolean getIntakeButton(){
+    return intakeButton.get();
+  }
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -39,6 +51,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     xbox = new XboxController(0);
+    intakeButton = new JoystickButton(xbox, 0);
   }
 
   public static double getYLeft(){
