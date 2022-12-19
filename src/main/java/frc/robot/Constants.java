@@ -32,10 +32,10 @@ public final class Constants {
 
   // === JOYSTICK BUTTONS ===
   // TODO: Configure these
-  public static final int BTN_A = 1;
-  public static final int BTN_B = 2;
-  public static final int BTN_X = 3;
-  public static final int BTN_Y = 4;
+  public static final int BTN_A = 0;
+  public static final int BTN_B = 1;
+  public static final int BTN_X = 2;
+  public static final int BTN_Y = 3;
 
   // === THRESHOLD VALUES ===
   public static final double MAX_CONVEYOR_SPEED = 0.5;
