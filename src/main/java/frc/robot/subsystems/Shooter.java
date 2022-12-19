@@ -14,16 +14,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.Commands;
 
-public class Conveyor extends SubsystemBase {
+public class Shooter extends SubsystemBase {
   /**
-   * Creates a new Conveyor.
+   * Creates new shooter mechanism (right and left SparkMaxes).
    */
 
-  CANSparkMax conveyor;
+  CANSparkMax shooterLeft;
+  CANSparkMax shooterRight;
 
-  public Conveyor() {
-    conveyor = new CANSparkMax(Constants.CONVEYOR_SPARK_ID, MotorType.kBrushed);
-    setDefaultCommand(Commands.conveyorStop);
+  public Shooter() {
+    shooterLeft = new CANSparkMax(Constants.LEFT_SHOOTER_SPARK_ID, MotorType.kBrushed);
+    shooterRight = new CANSparkMax(Constants.RIGHT_SHOOTER_SPARK_ID, MotorType.kBrushed);
+    setDefaultCommand(Commands.shooterStop);
   }
 
   @Override
@@ -31,15 +33,13 @@ public class Conveyor extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void pull() {
-    conveyor.set(-Constants.MAX_CONVEYOR_SPEED);
-  }
-
-  public void eject() {
-    conveyor.set(Constants.MAX_CONVEYOR_SPEED);
+  public void start() {
+    shooterLeft.set(Constants.MAX_SHOOTER_SPEED);
+    shooterRight.set(-Constants.MAX_SHOOTER_SPEED);
   }
 
   public void stop() {
-    conveyor.stopMotor();
+    shooterRight.stopMotor();
+    shooterLeft.stopMotor();
   }
 }
