@@ -30,11 +30,11 @@ public class Conveyor extends SubsystemBase {
   }
 
   public void pull(){
-    conveyor.set(0.5);
+    conveyor.set(-0.5);
   }
 
   public void eject(){
-    conveyor.set(-0.5);
+    conveyor.set(0.5);
   }
 
   public void stop(){

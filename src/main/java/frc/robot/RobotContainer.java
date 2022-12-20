@@ -51,7 +51,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     xbox = new XboxController(0);
-    intakeButton = new JoystickButton(xbox, 0);
+    intakeButton = new JoystickButton(xbox, 1);
   }
 
   public static double getYLeft(){

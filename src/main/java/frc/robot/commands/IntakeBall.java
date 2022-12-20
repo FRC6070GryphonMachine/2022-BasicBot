@@ -29,6 +29,7 @@ public class IntakeBall extends CommandBase {
   public void execute() {
     if(RobotContainer.getIntakeButton()){ 
       RobotContainer.conveyor.pull();
+      System.out.println("Here");
     } else {
       RobotContainer.conveyor.stop();
     }
