@@ -21,7 +21,9 @@ public class Conveyor extends SubsystemBase {
   CANSparkMax conveyor;
 
   public Conveyor() {
+    // left = new CANSparkMax(5, MotorType.kBrushed);
     conveyor = new CANSparkMax(6, MotorType.kBrushed);
+    // right = new CANSparkMax(7, MotorType.kBrushed);
   }
 
   @Override
@@ -39,5 +41,8 @@ public class Conveyor extends SubsystemBase {
 
   public void stop() {
     conveyor.stopMotor();
+    // left.stopMotor();
+    // right.stopMotor();
+
   }
 }
