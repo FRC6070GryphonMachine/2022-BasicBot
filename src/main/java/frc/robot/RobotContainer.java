@@ -7,17 +7,22 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.IntakeBall;
+import frc.robot.commands.ShootBall;
 // import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.StartDriving;
 import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in
+ * the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of
+ * the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
@@ -25,50 +30,72 @@ public class RobotContainer {
   public static Chassis chassis;
   public static XboxController xbox;
   public static JoystickButton intakeButton;
+  public static JoystickButton shooterButton;
+  public static JoystickButton ludicrousModeButton;
   public static Conveyor conveyor;
-  
-  
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  public static Shooter shooter;
+
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
   public RobotContainer() {
     // Configure the button bindings
     chassis = new Chassis();
     conveyor = new Conveyor();
+    shooter = new Shooter();
     configureButtonBindings();
 
     chassis.setDefaultCommand(new StartDriving());
     conveyor.setDefaultCommand(new IntakeBall());
+    shooter.setDefaultCommand(new ShootBall());
   }
 
-  
-  public static boolean getIntakeButton(){
+  public static boolean getIntakeButton() {
     return intakeButton.get();
   }
+
+  public static boolean getShooterButton() {
+    return shooterButton.get();
+  }
+
+  public static boolean getLudicrousModeButton() {
+    return ludicrousModeButton.get();
+  }
+
+  // public static boolean getLudicrousModeButton() {
+  // return ludicrousModeButton.get();
+  // }
+
   /**
-   * Use this method to define your button->command mappings. Buttons can be created by
+   * Use this method to define your button->command mappings. Buttons can be
+   * created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+   * it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
     xbox = new XboxController(0);
-    intakeButton = new JoystickButton(xbox, 0);
+    intakeButton = new JoystickButton(xbox, 6);
+    shooterButton = new JoystickButton(xbox, 2);
+    ludicrousModeButton = new JoystickButton(xbox, 1);
   }
 
-  public static double getYLeft(){
+  public static double getYLeft() {
     double kleft = xbox.getLeftY();
-    if(Math.abs(kleft) <= 0.1){
+    if (Math.abs(kleft) <= 0.1) {
       return 0;
     } else {
-      return -kleft*Math.abs(kleft); //Math.abs to preserve sign
+      return -kleft * Math.abs(kleft);
     }
   }
 
-  public static double getYRight(){
+  public static double getYRight() {
     double kright = xbox.getRightY();
-    if(Math.abs(kright) <= 0.1){
+    if (Math.abs(kright) <= 0.1) {
       return 0;
     } else {
-      return kright*Math.abs(kright); //Math.abs to preserve sign
+      return kright * Math.abs(kright);
     }
   }
 

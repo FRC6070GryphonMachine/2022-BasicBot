@@ -10,13 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class IntakeBall extends CommandBase {
+public class ShootBall extends CommandBase {
   /**
-   * Creates a new IntakeBall.
+   * Creates a new ShootBall.
    */
-  public IntakeBall() {
+  public ShootBall() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.conveyor);
+    addRequirements(RobotContainer.shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -28,9 +28,9 @@ public class IntakeBall extends CommandBase {
   @Override
   public void execute() {
     if (RobotContainer.getIntakeButton()) {
-      RobotContainer.conveyor.pull();
+      RobotContainer.shooter.shoot();
     } else {
-      RobotContainer.conveyor.stop();
+      RobotContainer.shooter.stop();
     }
   }
 

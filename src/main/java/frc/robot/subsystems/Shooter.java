@@ -13,15 +13,17 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.Constants;
 
-public class Conveyor extends SubsystemBase {
+public class Shooter extends SubsystemBase {
   /**
    * Creates a new Conveyor.
    */
 
-  CANSparkMax conveyor;
+  CANSparkMax leftShooter;
+  CANSparkMax rightShooter;
 
-  public Conveyor() {
-    conveyor = new CANSparkMax(6, MotorType.kBrushed);
+  public Shooter() {
+    leftShooter = new CANSparkMax(5, MotorType.kBrushed);
+    rightShooter = new CANSparkMax(7, MotorType.kBrushed);
   }
 
   @Override
@@ -29,15 +31,13 @@ public class Conveyor extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void pull() {
-    conveyor.set(-0.5);
-  }
-
-  public void eject() {
-    conveyor.set(0.5);
+  public void shoot() {
+    leftShooter.set(0.75);
+    rightShooter.set(0.75);
   }
 
   public void stop() {
-    conveyor.stopMotor();
+    leftShooter.stopMotor();
+    rightShooter.stopMotor();
   }
 }
